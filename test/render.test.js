@@ -1,5 +1,4 @@
 var assert = require('assert')
-// var document = require('global/document')
 var h = require('../src/h')
 var render = require('../src/render')
 var sinon = require('sinon')

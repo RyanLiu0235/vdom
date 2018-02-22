@@ -1,13 +1,14 @@
 {
   "name": "vdom",
   "version": "0.0.1",
-  "description": "",
+  "description": "a simple implementation of vdom",
   "main": "index.js",
   "scripts": {
     "build": "./nodemodules/.bin/rollup -c",
     "test": "./node_modules/.bin/mocha --recursive",
     "lint": "./node_modules/.bin/eslint src --fix",
-    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -R spec"
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -R spec",
+    "codecov": "node ./codecov.js"
   },
   "repository": {
     "type": "git",

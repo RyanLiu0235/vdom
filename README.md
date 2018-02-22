@@ -1,1 +1,1 @@
-# vdom
+# vdom [![Build Status](https://travis-ci.org/stop2stare/vdom.svg?branch=master)](https://travis-ci.org/stop2stare/vdom) [![codecov](https://codecov.io/gh/stop2stare/vdom/branch/master/graph/badge.svg)](https://codecov.io/gh/stop2stare/vdom)

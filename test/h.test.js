@@ -1,5 +1,4 @@
 var assert = require('assert')
-var document = require('global/document')
 var h = require('../src/h')
 
 describe('test h', function() {
