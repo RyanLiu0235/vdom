@@ -1,7 +1,10 @@
 function VNode(tagName, props, children) {
+  props = props || {}
+
   this.tagName = tagName
   this.props = props
-  this.children = children
+  this.key = props.key || undefined
+  this.children = children || []
 }
 
 module.exports = VNode
