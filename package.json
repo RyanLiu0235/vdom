@@ -23,7 +23,9 @@
     "url": "https://github.com/stop2stare/vdom/issues"
   },
   "homepage": "https://github.com/stop2stare/vdom#readme",
-  "dependencies": {},
+  "dependencies": {
+    "list-diff2": "^0.1.4"
+  },
   "devDependencies": {
     "codecov": "^3.0.0",
     "eslint": "^4.17.0",

@@ -4,7 +4,7 @@ var assert = require('assert')
 var types = require('../src/types')
 
 describe('test diff', function() {
-  it('should handle replacing', function() {
+  it('should handle dom replacing', function() {
     var tree0 = h('i')
     var tree1 = h('em')
 
@@ -41,13 +41,19 @@ describe('test diff', function() {
   })
 
   it('should handle elements deleted', function() {
-    var tree0 = h('i')
-    var tree1 = null
+    var tree0 = h('div', {}, [h('span')])
+    var tree1 = h('div', {})
 
     var patches = diff(tree0, tree1)
     assert.deepEqual(patches, {
       0: [{
-        type: types.REMOVED
+        type: types.REORDER,
+        patch: {
+          moves: [{
+            index: 0,
+            type: 0
+          }]
+        }
       }]
     })
   })
@@ -61,6 +67,34 @@ describe('test diff', function() {
       0: [{
         type: types.TEXT,
         patch: 'p2'
+      }]
+    })
+  })
+
+  it('should handle children changed', function() {
+    var tree0 = h('ul', {}, [
+      h('li', { key: 0 }),
+      h('li', { key: 1 }),
+      h('li', { key: 2 })
+    ])
+    var tree1 = h('ul', {}, [
+      h('li', { key: 1, name: 'aa' })
+    ])
+
+    var patches = diff(tree0, tree1)
+    assert.deepEqual(patches, {
+      0: [{
+        type: types.REORDER,
+        patch: {
+          moves: [
+            { index: 0, type: 0 },
+            { index: 1, type: 0 }
+          ]
+        }
+      }],
+      2: [{
+        type: types.PROPS,
+        patch: { name: 'aa' }
       }]
     })
   })
