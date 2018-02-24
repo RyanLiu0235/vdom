@@ -4,7 +4,7 @@
   "description": "a simple implementation of vdom",
   "main": "index.js",
   "scripts": {
-    "build": "./nodemodules/.bin/rollup -c",
+    "build": "./node_modules/.bin/rollup -c",
     "test": "./node_modules/.bin/mocha --recursive",
     "lint": "./node_modules/.bin/eslint src --fix",
     "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -R spec",
@@ -40,6 +40,7 @@
     "mocha-jsdom": "^1.1.0",
     "rollup": "^0.55.3",
     "rollup-plugin-commonjs": "^8.3.0",
+    "rollup-plugin-node-resolve": "^3.0.3",
     "rollup-plugin-uglify": "^3.0.0",
     "sinon": "^4.3.0"
   }
