@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>todo</title>
+  <script src="../dist/vdom.js"></script>
+  <style type="text/css">
+  .del {
+    margin-left: 10px;
+  }
+
+  </style>
+</head>
+
+<body>
+  <h1>todo</h1>
+  <p>add todo:</p>
+  <div>
+    <input id="input"
+      type="text"
+      placeholder="todo" />
+    <button id="submit">submit</button>
+  </div>
+  <hr>
+  <p>todo list:</p>
+  <div id="app"></div>
+  <script type="text/javascript">
+  var h = vdom.h
+  var render = vdom.render
+  var diff = vdom.diff
+  var patch = vdom.patch
+
+  var count = 0
+  var todos = []
+  var tree = h('ol', { id: 'list' }, todos)
+
+  var input = document.getElementById('input')
+  var button = document.getElementById('submit')
+  var app = document.getElementById('app')
+
+  var dom = render(tree)
+  app.appendChild(dom)
+
+  function handler() {
+    var dom = render(tree)
+    var newTree = h('ol', { id: 'list' }, todos)
+    var patches = diff(tree, newTree)
+    patch(dom, patches)
+
+    app.removeChild(document.getElementById('list'))
+    app.appendChild(dom)
+
+    tree = newTree
+    input.value = ''
+  }
+
+  function handleAdd() {
+    var todo = input.value.trim()
+    if (todo) {
+      var update = h('li', { key: count++ }, [
+        todo,
+        h('button', { class: 'del' }, ['x'])
+      ])
+      todos.push(update)
+      handler()
+    }
+  }
+
+  // add
+  button.addEventListener('click', handleAdd)
+  input.addEventListener('keyup', function(e) {
+    if (e.which === 13) {
+      handleAdd()
+    }
+  })
+
+  // del
+  app.addEventListener('click', function(e) {
+    var target = e.target
+    if (target.tagName === 'BUTTON') {
+      var li = target.parentNode
+      var key = li.getAttribute('key')
+      for (var i = 0; i < todos.length; i++) {
+        if (todos[i].key === +key) {
+          todos.splice(i, 1)
+          break
+        }
+      }
+      handler()
+    }
+  })
+
+  </script>
+</body>
+
+</html>
