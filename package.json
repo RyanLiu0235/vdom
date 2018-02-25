@@ -1,6 +1,6 @@
 {
   "name": "seb-vdom",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "a simple implementation of vdom",
   "main": "./dist/seb.min.js",
   "scripts": {
@@ -18,7 +18,7 @@
     "vdom"
   ],
   "author": "liucheng",
-  "license": "MIT",
+  "license": "WTFPL",
   "bugs": {
     "url": "https://github.com/stop2stare/vdom/issues"
   },
