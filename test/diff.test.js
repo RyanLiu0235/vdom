@@ -25,7 +25,8 @@ describe('test diff', function() {
     })
     var tree1 = h('i', {
       class: 'bar',
-      name: 'i'
+      name: 'i',
+      baz: 1
     })
 
     var patches = diff(tree0, tree1)
@@ -34,7 +35,8 @@ describe('test diff', function() {
         type: types.PROPS,
         patch: {
           class: 'bar',
-          id: undefined
+          id: undefined,
+          baz: 1
         }
       }]
     })

@@ -70,9 +70,15 @@ function patchReorder(oldDom, moves) {
 
 function patchProps(oldDom, _patch) {
   var props = Object.keys(_patch)
-  for (var i = 0, prop; i < props.length; i++) {
+  var prop, value
+  for (var i = 0; i < props.length; i++) {
     prop = props[i]
-    oldDom.setAttribute(prop, _patch[prop])
+    value = _patch[prop]
+    if (value === false || value === undefined) {
+      oldDom.removeAttribute(prop)
+    } else {
+      oldDom.setAttribute(prop, value)
+    }
   }
 }
 

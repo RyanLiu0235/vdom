@@ -53,15 +53,26 @@ describe('test patch', function() {
   })
 
   it('should handle props changed', function() {
-    var tree0 = h('div', { class: 'a' })
-    var tree1 = h('div', { class: 'b' })
+    var tree0 = h('i', {
+      class: 'foo',
+      name: 'i',
+      id: 'foo'
+    })
+    var tree1 = h('i', {
+      class: 'bar',
+      name: 'i',
+      baz: 1
+    })
 
     var dom = render(tree0)
     var patches = diff(tree0, tree1)
     sinon.spy(dom, 'setAttribute')
+    sinon.spy(dom, 'removeAttribute')
     patch(dom, patches)
 
-    assert.ok(dom.setAttribute.withArgs('class', 'b').calledOnce)
+    assert.ok(dom.setAttribute.withArgs('class', 'bar').calledOnce)
+    assert.ok(dom.setAttribute.withArgs('baz', 1).calledOnce)
+    assert.ok(dom.removeAttribute.withArgs('id').calledOnce)
     dom.setAttribute.restore()
   })
 
