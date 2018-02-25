@@ -46,7 +46,6 @@ function handlePatch(oldDom, currentPatch) {
 
 function patchReorder(oldDom, moves) {
   var children = oldDom.childNodes
-  var len = children.length
   var move, index, item, child
   for (var i = 0; i < moves.length; i++) {
     move = moves[i]
