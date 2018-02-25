@@ -73,7 +73,9 @@ function patchProps(oldDom, _patch) {
   for (var i = 0; i < props.length; i++) {
     prop = props[i]
     value = _patch[prop]
-    if (value === false || value === undefined) {
+    if (typeof value === 'function') {
+      // can't bind function later
+    } else if (value === false || value === undefined) {
       oldDom.removeAttribute(prop)
     } else {
       oldDom.setAttribute(prop, value)

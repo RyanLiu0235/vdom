@@ -8,7 +8,10 @@ var stub = sinon.stub
 describe('test render', function() {
   it('should render', function() {
     var tree = h('div', {
-      class: 'bar'
+      class: 'bar',
+      onclick: function(e) {
+        console.log(e.target.tagName)
+      }
     }, [
       h('p', {}, ['paragraph 1']),
       h('p', {}, ['paragraph 2'])
@@ -20,9 +23,11 @@ describe('test render', function() {
     var spy1 = document.createTextNode = spy()
     var spy2 = spy()
     var spy3 = spy()
+    var spy4 = spy()
     var spy0 = document.createElement = stub().returns({
       setAttribute: spy2,
-      appendChild: spy3
+      appendChild: spy3,
+      addEventListener: spy4
     })
 
     render(tree)
@@ -30,6 +35,7 @@ describe('test render', function() {
     assert.ok(spy1.withArgs('paragraph 1').calledOnce)
     assert.ok(spy2.withArgs('class', 'bar').calledOnce)
     assert.deepEqual(spy3.callCount, 4)
+    assert.deepEqual(spy4.callCount, 1)
 
     global.document = docCopy
   })

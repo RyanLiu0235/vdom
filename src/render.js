@@ -5,10 +5,18 @@ function render(vnode) {
   // 2. add props
   var props = vnode.props
   var propNames = Object.keys(props)
-  var prop
+  var prop, value
   for (var i = 0; i < propNames.length; i++) {
     prop = propNames[i]
-    el.setAttribute(prop, props[prop])
+    value = props[prop]
+    if (typeof value === 'function') {
+      // bind this function to el
+      el.addEventListener(prop, function(e) {
+        value.call(this, e)
+      })
+    } else {
+      el.setAttribute(prop, value)
+    }
   }
 
   // 3. children
