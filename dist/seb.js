@@ -1,5 +1,5 @@
 /**
- * seb-vdom v0.0.1
+ * seb-vdom v0.0.3
  * (c) 2018 Ryan Liu
  * @license WTFPL
  */
@@ -44,10 +44,18 @@ function render(vnode) {
   // 2. add props
   var props = vnode.props;
   var propNames = Object.keys(props);
-  var prop;
+  var prop, value;
   for (var i = 0; i < propNames.length; i++) {
     prop = propNames[i];
-    el.setAttribute(prop, props[prop]);
+    value = props[prop];
+    if (typeof value === 'function') {
+      // bind this function to el
+      el.addEventListener(prop, function(e) {
+        value.call(this, e);
+      });
+    } else {
+      el.setAttribute(prop, value);
+    }
   }
 
   // 3. children
@@ -376,7 +384,6 @@ function handlePatch(oldDom, currentPatch) {
 
 function patchReorder(oldDom, moves) {
   var children = oldDom.childNodes;
-  var len = children.length;
   var move, index, item, child;
   for (var i = 0; i < moves.length; i++) {
     move = moves[i];
@@ -404,7 +411,9 @@ function patchProps(oldDom, _patch) {
   for (var i = 0; i < props.length; i++) {
     prop = props[i];
     value = _patch[prop];
-    if (value === false || value === undefined) {
+    if (typeof value === 'function') {
+      // can't bind function later
+    } else if (value === false || value === undefined) {
       oldDom.removeAttribute(prop);
     } else {
       oldDom.setAttribute(prop, value);

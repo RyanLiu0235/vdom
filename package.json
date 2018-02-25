@@ -1,6 +1,6 @@
 {
   "name": "seb-vdom",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "a simple implementation of vdom",
   "main": "./dist/seb.min.js",
   "scripts": {
