@@ -1,12 +1,12 @@
 /**
- * vdom v0.0.1
+ * seb-vdom v0.0.1
  * (c) 2018 Ryan Liu
  * @license WTFPL
  */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
-	(global.vdom = factory());
+	(global.seb = factory());
 }(this, (function () { 'use strict';
 
 function VNode(tagName, props, children) {
@@ -400,9 +400,15 @@ function patchReorder(oldDom, moves) {
 
 function patchProps(oldDom, _patch) {
   var props = Object.keys(_patch);
-  for (var i = 0, prop; i < props.length; i++) {
+  var prop, value;
+  for (var i = 0; i < props.length; i++) {
     prop = props[i];
-    oldDom.setAttribute(prop, _patch[prop]);
+    value = _patch[prop];
+    if (value === false || value === undefined) {
+      oldDom.removeAttribute(prop);
+    } else {
+      oldDom.setAttribute(prop, value);
+    }
   }
 }
 

@@ -4,7 +4,7 @@ var resolve = require('rollup-plugin-node-resolve')
 var version = require('./package.json').version
 var banner =
   `/**
- * vdom v${version}
+ * seb-vdom v${version}
  * (c) ${new Date().getFullYear()} Ryan Liu
  * @license WTFPL
  */`
@@ -12,20 +12,20 @@ var banner =
 export default [{
   input: './vdom',
   output: {
-    file: './dist/vdom.js',
+    file: './dist/seb.js',
     format: 'umd',
-    name: 'vdom',
-    globals: 'vdom',
+    name: 'seb',
+    globals: 'seb',
     banner
   },
   plugins: [cjs(), resolve()]
 }, {
   input: './vdom',
   output: {
-    file: './dist/vdom.min.js',
+    file: './dist/seb.min.js',
     format: 'umd',
-    name: 'vdom',
-    globals: 'vdom',
+    name: 'seb',
+    globals: 'seb',
     banner
   },
   plugins: [cjs(), uglify(), resolve()]

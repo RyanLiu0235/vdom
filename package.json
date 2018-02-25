@@ -1,8 +1,8 @@
 {
-  "name": "vdom",
+  "name": "seb-vdom",
   "version": "0.0.1",
   "description": "a simple implementation of vdom",
-  "main": "index.js",
+  "main": "./dist/seb.min.js",
   "scripts": {
     "build": "./node_modules/.bin/rollup -c",
     "test": "./node_modules/.bin/mocha --recursive",

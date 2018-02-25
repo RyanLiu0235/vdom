@@ -74,6 +74,7 @@ describe('test patch', function() {
     assert.ok(dom.setAttribute.withArgs('baz', 1).calledOnce)
     assert.ok(dom.removeAttribute.withArgs('id').calledOnce)
     dom.setAttribute.restore()
+    dom.removeAttribute.restore()
   })
 
   it('should handle text node changed', function() {
