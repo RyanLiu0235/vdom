@@ -58,10 +58,23 @@
   function handleAdd() {
     var todo = input.value.trim()
     if (todo) {
-      var update = h('li', { key: count++ }, [
-        todo,
-        h('button', { class: 'del' }, ['x'])
-      ])
+      var key = count++
+        var update = h('li', { key: key }, [
+          todo,
+          h('button', {
+            class: 'del',
+            onclick: function(e) {
+              var li = e.target.parentNode
+              for (var i = 0; i < todos.length; i++) {
+                if (todos[i].key === key) {
+                  todos.splice(i, 1)
+                  break
+                }
+              }
+              handler()
+            }
+          }, ['x'])
+        ])
       todos.push(update)
       handler()
     }
@@ -72,22 +85,6 @@
   input.addEventListener('keyup', function(e) {
     if (e.which === 13) {
       handleAdd()
-    }
-  })
-
-  // del
-  app.addEventListener('click', function(e) {
-    var target = e.target
-    if (target.tagName === 'BUTTON') {
-      var li = target.parentNode
-      var key = li.getAttribute('key')
-      for (var i = 0; i < todos.length; i++) {
-        if (todos[i].key === +key) {
-          todos.splice(i, 1)
-          break
-        }
-      }
-      handler()
     }
   })
 
