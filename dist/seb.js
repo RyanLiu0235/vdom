@@ -1,5 +1,5 @@
 /**
- * seb-vdom v0.0.3
+ * seb-vdom v0.1.0
  * (c) 2018 Ryan Liu
  * @license WTFPL
  */
@@ -50,9 +50,10 @@ function render(vnode) {
     value = props[prop];
     if (typeof value === 'function') {
       // bind this function to el
-      el.addEventListener(prop, function(e) {
-        value.call(this, e);
-      });
+      // prop expects event name lick `onclick`
+      if (prop in el) {
+        el[prop] = value;
+      }
     } else {
       el.setAttribute(prop, value);
     }
